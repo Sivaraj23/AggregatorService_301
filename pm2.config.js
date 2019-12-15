@@ -1,12 +1,12 @@
 module.exports = {
     apps : [{
       name        : "www",
-      script      : "./bin/www --exec babel-node",
+      script      : "./dist/server.js",
       watch       : true,
       
     },{
       name       : "app",
-      script     : "./app.js",
+      script     : "./dist/app.js",
       watch:true
     }]
   }
