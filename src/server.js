@@ -4,10 +4,10 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var app = require('./app');
 var debug = require('debug')('aggregatorservice:server');
 var http = require('http');
-var logger=require("../utilities/Logger")
+var logger=require("./utilities/Logger")
 
 
 /**

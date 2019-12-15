@@ -4,27 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
-var swaggerJSDoc = require('swagger-jsdoc');
 
 var winston = require('./utilities/Logger');
 var indexRouter = require('./routes/index');
 
 var ordersRouter = require("./routes/analysis/analysis");
-const swaggerDefinition = {
-  info: {
-    title: 'Aggregator service API',
-    version: '1.0.0',
-    description: 'Endpoints for Aggregator service',
-  },
-  host: 'localhost:3000',
-  basePath: '/api/analysis'
-};
-const options = {
-  swaggerDefinition,
-  apis: ['./routes/index.js','./routes/analysis/analysis.js'],
-};
 
-const swaggerSpec = swaggerJSDoc(options);
 var app = express();
 
 
@@ -48,11 +33,6 @@ app.use(bodyParser.urlencoded({
 
 
 app.use(bodyParser.json());
-
-app.get('/swagger.json', function(req, res) {
-  res.setHeader('Content-Type', 'application/json');
-  res.send(swaggerSpec);
-});
 
 app.use('/', indexRouter);
 try{
