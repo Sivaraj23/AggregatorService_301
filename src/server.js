@@ -9,7 +9,7 @@ var debug = require('debug')('aggregatorservice:server');
 var http = require('http');
 var logger=require("./utilities/Logger")
 
-
+var consul = require("../consul")
 /**
  * Get port from environment and store in Express.
  */
