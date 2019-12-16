@@ -6,7 +6,9 @@ import AnalysisService from './services/analysisService';
 import ValidationService from './services/validationService';
 
 var router = express.Router();
-
+router.get('/', function(req, res, next) {
+   res.write('index');
+ });
 router.route('/fetchAllOrdersInCityPerDay')
 /**
  * @swagger

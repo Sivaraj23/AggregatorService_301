@@ -1,6 +1,7 @@
 
 import logger from "../../../utilities/Logger"
-import SERVER_BASE_URLS from "../../../config/constants";
+// import SERVER_BASE_URLS from "../../../config/constants";
+import urlsAvailable from "../../../config/consul";
 var rp = require('request-promise');
 var path = require('path');
 var NAME = path.basename(__filename);
@@ -11,14 +12,14 @@ const AnalysisService = {
     fetchAllOrdersInCityPerDay: async (obj) => {
      
         logger.info(NAME+"->Getting the list of Orders in"+obj.city+" on "+obj.date )
-        var listOfRestaurants=JSON.parse(await rp(SERVER_BASE_URLS.SEARCH_SERVICE_URL+"?city="+obj.city))
+        var listOfRestaurants=JSON.parse(await rp(urlsAvailable().known_search_instances[0]+"/api/search?city="+obj.city))
         var listOfRestaurantIds=[];
         listOfRestaurants.forEach((res)=>{
             listOfRestaurantIds.push(res._id)
         })
         var options = {
             method: 'POST',
-            uri: SERVER_BASE_URLS.ORDER_SERVICE_URL+"/getAllOrdersByResIds",
+            uri: urlsAvailable().known_order_instances[0]+"api/orders/getAllOrdersByResIds",
             body: {
                 list : listOfRestaurantIds,
                 date : obj.date
@@ -32,14 +33,14 @@ const AnalysisService = {
     },
     fetchAmountOfOrdersInCityPerDay: async (obj) => {
         logger.info(NAME+"->Getting the total amount of Orders in "+obj.city+" on "+obj.date )
-        var listOfRestaurants=JSON.parse(await rp(SERVER_BASE_URLS.SEARCH_SERVICE_URL+"?city="+obj.city))
+        var listOfRestaurants=JSON.parse(await rp(urlsAvailable().known_search_instances[0]+"/api/search?city="+obj.city))
         var listOfRestaurantIds=[];
         listOfRestaurants.forEach((res)=>{
             listOfRestaurantIds.push(res._id)
         })
         var options = {
             method: 'POST',
-            uri: SERVER_BASE_URLS.ORDER_SERVICE_URL+"/getTotalAmountOnGivenDate",
+            uri: urlsAvailable().known_order_instances[0]+"api/orders/getTotalAmountOnGivenDate",
             body: {
                 list : listOfRestaurantIds,
                 date : obj.date
@@ -56,7 +57,7 @@ const AnalysisService = {
      
         logger.info(NAME+"->Getting the list of restaurants in"+obj.city)
         try{
-        return JSON.parse(await rp(SERVER_BASE_URLS.SEARCH_SERVICE_URL+"?city="+obj.city))
+        return JSON.parse(await rp(urlsAvailable().known_search_instances[0]+"/api/search?city="+obj.city))
         }catch(err){
             logger.info(NAME+"->Error while Getting the list of restaurants in"+obj.city)
             throw new Error("Error while Getting the list of restaurants in"+obj.city)

@@ -3,13 +3,15 @@
 /**
  * Module dependencies.
  */
-
+try{
+  
+var consul = require("./config/consul")
 var app = require('../app');
+}catch(err){console.log(err)}
 var debug = require('debug')('aggregatorservice:server');
 var http = require('http');
 var logger=require("./utilities/Logger")
 
-var consul = require("../consul")
 /**
  * Get port from environment and store in Express.
  */

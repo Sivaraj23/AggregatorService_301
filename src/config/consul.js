@@ -21,22 +21,22 @@ host : '172.19.57.162' });
 
 
 consul.acl.bootstrap(function(err, result) {
-    console.log(err, result)
+    // console.log(err, result)
     // if (err) throw err;
   });
 
 
   consul.agent.members(function(err, result) {
-    console.log('members', err, result)
+    // console.log('members', err, result)
     if (err) throw err;
   });
 
  
  
-  const PORT =  8889;
+  const PORT = +process.env.IP_ADDRESS || 8889;
   const IP_ADDRESS = process.env.IP_ADDRESS || 'localhost';
   
-  let known_search_instances = [];
+var known_search_instances = [];
 
   const watcher = consul.watch({
     method: consul.health.service,
@@ -56,7 +56,7 @@ consul.acl.bootstrap(function(err, result) {
   });
   
   
-  let known_order_instances = [];
+ var known_order_instances = [];
   
   const orderWatcher = consul.watch({
     method: consul.health.service,
@@ -74,3 +74,7 @@ consul.acl.bootstrap(function(err, result) {
   
     console.log("Available known_order_instances services ", known_order_instances);
   });
+  function urlsAvailable(){
+    return {known_order_instances,known_search_instances}
+  }
+  export default urlsAvailable;
