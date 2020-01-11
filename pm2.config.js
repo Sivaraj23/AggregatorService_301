@@ -1,12 +1,11 @@
 module.exports = {
     apps : [{
-      name        : "www",
+      name        : "aggregate",
       script      : "./dist/server.js",
       watch       : true,
-      
-    },{
-      name       : "app",
-      script     : "./dist/app.js",
-      watch:true
-    }]
-  }
+
+      env : {
+
+        PORT : 3000
+   }}] 
+ }

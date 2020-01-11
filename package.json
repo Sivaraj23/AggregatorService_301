@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./src/server --exec babel-node",
-    "build": "babel ./src --out-dir ./dist && cp ./src/public/api-docs  dist/public/ "
+    "build": "babel ./src --out-dir ./dist && cp ./app.js  dist/ "
   },
   "dependencies": {
     "@babel/cli": "^7.7.5",
