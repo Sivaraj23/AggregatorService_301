@@ -5,15 +5,15 @@ var cookieParser = require('cookie-parser');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var swaggerJSDoc = require('swagger-jsdoc');
-var winston = require("./src/utilities/Logger");
-var indexRouter = require("./src/routes/index");
+var winston = require("./utilities/Logger");
+var indexRouter = require("./routes/index");
 
-var ordersRouter = require("./src/routes/analysis/analysis");
+var ordersRouter = require("./routes/analysis/analysis");
 
 var app = express();
 // swagger definition
 // view engine setup
-app.set('views', path.join(__dirname+"/src", 'views'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 var swaggerDefinition = {
@@ -31,7 +31,7 @@ var options = {
   // import swaggerDefinitions
   swaggerDefinition: swaggerDefinition,
   // path to the API docs
-  apis: ['./src/routes/index.js', './src/routes/analysis/analysis.js'] };
+  apis: ['./routes/index.js', './routes/analysis/analysis.js'] };
 
 
 // initialize swagger-jsdoc
@@ -46,7 +46,7 @@ app.use(morgan('combined', { stream: winston.stream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express["static"](path.join(__dirname+"/src", 'public')));
+app.use(express["static"](path.join(__dirname, 'public')));
 
 app.use(bodyParser.urlencoded({
   extended: true }));

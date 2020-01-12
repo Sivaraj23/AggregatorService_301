@@ -77,4 +77,4 @@ var known_search_instances = [];
   function urlsAvailable(){
     return {known_order_instances,known_search_instances}
   }
-  export default urlsAvailable;
+  module.exports =  urlsAvailable;

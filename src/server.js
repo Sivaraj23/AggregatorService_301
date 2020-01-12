@@ -6,7 +6,7 @@
 try{
   
 var consul = require("./config/consul")
-var app = require('../app');
+var app = require('./app');
 }catch(err){console.log(err)}
 var debug = require('debug')('aggregatorservice:server');
 var http = require('http');
@@ -19,7 +19,8 @@ var logger=require("./utilities/Logger")
 var port = normalizePort(process.env.PORT || '3000');
 
 var IP_ADDRESS = normalizePort(process.env.IP_ADDRESS || '127.0.0.1');
-app.set('port', port);
+
+//app.set('port', port);
 
 /**
  * Create HTTP server.
